@@ -19,37 +19,8 @@ vim.o.splitright = true
 vim.o.relativenumber = true
 vim.o.number = true
 
--- Buffers
-
-local function closeBuffer()
-  local treeView = require('nvim-tree.view')
-  local bufferline = require('bufferline')
-
-  -- check if NvimTree window was open
-  local explorerWindow = treeView.get_winnr()
-    if explorerWindow == nil then
-        vim.cmd('bdelete! ')
-        return
-    end
-  local wasExplorerOpen = vim.api.nvim_win_is_valid(explorerWindow)
-
-  local bufferToDelete = vim.api.nvim_get_current_buf()
-
-  -- TODO: handle modified buffers
-  -- local isModified = vim.api.nvim_eval('getbufvar(' .. bufferToDelete .. ', "&mod")')
-
-  if (wasExplorerOpen) then
-    -- switch to previous buffer (tracked by bufferline)
-    bufferline.cycle(-1)
-  end
-
-  -- delete initially open buffer
-  vim.cmd('bdelete! ' .. bufferToDelete)
-end
-
-vim.keymap.set('n', '<leader>q', closeBuffer, { desc = 'close buffer' })
-
--- change buffers 
+-- buffers 
+vim.keymap.set('n', '<leader>q', ':bd<CR>', { desc = 'close buffer' })
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'move to left buffer'})
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'move to lower buffer'})
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'move to upper buffer'})
@@ -69,34 +40,20 @@ vim.keymap.set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
 vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
--- Bufferline
-require('bufferline').setup {
-    options = {
-        diagnostics = 'nvim_lsp',
-        offsets = {
-            {
-                filetype = 'NvimTree',
-                text = 'File Explorer',
-                text_align = 'left',
-                separator = true
-            }
-        },
-    }
-}
+-- windows
+vim.keymap.set("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
+vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete window" })
+vim.keymap.set("n", "<leader>w-", "<C-W>s", { desc = "Split window below" })
+vim.keymap.set("n", "<leader>w|", "<C-W>v", { desc = "Split window right" })
+vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
+vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split window right" })
 
-vim.keymap.set('n', 'gt', ':BufferLineCycleNext<CR>', { desc = 'go to next buffer' })
-vim.keymap.set('n', 'gT', ':BufferLineCyclePrev<CR>', { desc = 'go to previous buffer' })
+-- quit all 
+vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit all" })
 
--- NvimTree
-local function open_nvim_tree()
-  -- open the tree
-  require("nvim-tree.api").tree.toggle({ focus = false, find_file = true })
-end
-
-vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
-
-vim.keymap.set('n', '<leader>e', require('nvim-tree').open, { desc = 'open [e]xplorer' })
-vim.keymap.set('n', '<leader>E', ':NvimTreeClose<CR>', { desc = 'close [E]xplorer' })
+-- file browser
+pcall(require('telescope').load_extension, 'file_browser')
+vim.keymap.set('n', '<leader>e', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = 'open [e]xplorer', noremap = true })
 
 -- Toggleterm
 require('toggleterm').setup {
@@ -114,7 +71,7 @@ local function _lazygit_toggle()
     lazygit:toggle()
 end
 
-vim.keymap.set('n', '<leader>g', _lazygit_toggle, { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>g', _lazygit_toggle, { noremap = true, silent = true, desc = 'lazy [g]it' })
 
 -- Common kill function for bdelete and bwipeout.
 -- credits: based on bbye, nvim-bufdel and LunarVim.
