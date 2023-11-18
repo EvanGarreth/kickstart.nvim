@@ -8,6 +8,13 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.cmd [[highlight IndentBlanklineIndent1 guibg=#E9EDF4 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent2 guibg=#E5F2F0 gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent3 guibg=#E3EFEE gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent4 guibg=#F4EEED gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent5 guibg=#F5E8EA gui=nocombine]]
+vim.cmd [[highlight IndentBlanklineIndent6 guibg=#F1ECEA gui=nocombine]]
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -130,8 +137,24 @@ require('lazy').setup({
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
     opts = {
-      char = '┊',
+      char = '',
       show_trailing_blankline_indent = false,
+      char_highlight_list = {
+        'IndentBlanklineIndent1',
+        'IndentBlanklineIndent2',
+        'IndentBlanklineIndent3',
+        'IndentBlanklineIndent4',
+        'IndentBlanklineIndent5',
+        'IndentBlanklineIndent6',
+      },
+      space_char_highlight_list = {
+        'IndentBlanklineIndent1',
+        'IndentBlanklineIndent2',
+        'IndentBlanklineIndent3',
+        'IndentBlanklineIndent4',
+        'IndentBlanklineIndent5',
+        'IndentBlanklineIndent6',
+      }
     },
   },
 
