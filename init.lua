@@ -550,6 +550,34 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
+local lsp_symbols = {
+  Text = " 	(Text) ",
+  Method = " 	(Method)",
+  Function = " 	(Function)",
+  Constructor = "   (Constructor)",
+  Field = " ﴲ  (Field)",
+  Variable = "[] (Variable)",
+  Class = "   (Class)",
+  Interface = " ﰮ  (Interface)",
+  Module = " 	(Module)",
+  Property = " 襁 (Property)",
+  Unit = " 	(Unit)",
+  Value = "   (Value)",
+  Enum = " 練 (Enum)",
+  Keyword = "   (Keyword)",
+  Snippet = "   (Snippet)",
+  Color = "   (Color)",
+  File = " 	(File)",
+  Reference = "   (Reference)",
+  Folder = " 	(Folder)",
+  EnumMember = " 	(EnumMember)",
+  Constant = " ﲀ	(Constant)",
+  Struct = " ﳤ	(Struct)",
+  Event = "   (Event)",
+  Operator = " 	(Operator)",
+  TypeParameter = "   (TypeParameter)",
+}
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -569,15 +597,19 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<Tab>'] = cmp.mapping(function(fallback)
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
       if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
-        luasnip.expand_or_jump()
+        local entry = cmp.get_selected_entry()
+        if not entry then
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+        else
+          cmp.confirm()
+        end
       else
         fallback()
       end
-    end, { 'i', 's' }),
+    end, { "i", "s", "c", }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -591,6 +623,25 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+  formatting = {
+    format = function(entry, item)
+      item.kind = lsp_symbols[item.kind]
+      item.menu = ({
+        buffer = "[B]",
+        nvim_lsp = "[L]",
+        path = "[P]",
+        sql = "[DB]",
+        luasnip = "[Snippet]",
+        -- neorg = "[Neorg]",
+      })[entry.source.name]
+
+      return item
+    end,
   },
 }
 
