@@ -294,6 +294,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('telescope').setup {
   defaults = {
     layout_strategy = 'vertical',
+    path_display = { 'smart' },
     preview = {
       filesize_limit = 0.1, -- MB
       ls_short = true
@@ -354,7 +355,8 @@ end
 vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader>?', function() require('telescope.builtin').oldfiles({ only_cwd = true }) end,
+  { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
@@ -795,8 +797,8 @@ local function _k9s_toggle()
 end
 vim.keymap.set('n', '<leader>k', _k9s_toggle, { noremap = true, silent = true, desc = '[k]9s' })
 
-vim.keymap.set('n', '<leader>fn', ':let @+ = expand("%:t")<cr>', { noremap = true, silent = true, desc = "[f]ile [n]ame"})
-vim.keymap.set('n', '<leader>fp', ':let @+ = expand("%")<cr>', { noremap = true, silent = true, desc = "[f]ile [p]ath"})
+vim.keymap.set('n', '<leader>fn', ':let @+ = expand("%:t")<cr>', { noremap = true, silent = true, desc = "[f]ile [n]ame" })
+vim.keymap.set('n', '<leader>fp', ':let @+ = expand("%")<cr>', { noremap = true, silent = true, desc = "[f]ile [p]ath" })
 
 -- scrolling
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
