@@ -783,7 +783,7 @@ require('toggleterm').setup {
 
 vim.keymap.set('n', '<C-t>', ':ToggleTerm<CR>', { desc = '[t]erminal' })
 vim.keymap.set('t', '<C-t>', '<C-\\><C-n><C-w>l', { desc = 'close [t]erminal' })
-
+  
 -- LazyGit
 local Terminal = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
@@ -807,6 +807,18 @@ vim.keymap.set('n', '<leader>fp', ':let @+ = expand("%")<cr>', { noremap = true,
 -- scrolling
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
+
+" Center screen on next/previous selection.
+vim.keymap.set('n', 'n', 'nzz')
+vim.keymap.set('n', 'N', 'Nzz')
+
+" Last and next jump should center too.
+vim.keymap.set('n', '<C-o>', '<C-o>zz')
+vim.keymap.set('n', '<C-i>', '<C-i>zz')
+
+" Next paragraph as well
+vim.keymap.set('n', '}', '}zz')
+vim.keymap.set('n', '{', '{zz')
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
