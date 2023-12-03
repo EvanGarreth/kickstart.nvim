@@ -808,15 +808,15 @@ vim.keymap.set('n', '<leader>fp', ':let @+ = expand("%")<cr>', { noremap = true,
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 
-" Center screen on next/previous selection.
+-- Center screen on next/previous selection.
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
 
-" Last and next jump should center too.
+-- Last and next jump should center too.
 vim.keymap.set('n', '<C-o>', '<C-o>zz')
 vim.keymap.set('n', '<C-i>', '<C-i>zz')
 
-" Next paragraph as well
+-- Next paragraph as well
 vim.keymap.set('n', '}', '}zz')
 vim.keymap.set('n', '{', '{zz')
 
