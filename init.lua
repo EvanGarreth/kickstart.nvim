@@ -381,7 +381,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'c_sharp', 'go', 'lua', 'python', 'rust', 'scss', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'c_sharp', 'dart', 'go', 'lua', 'python', 'rust', 'scss', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -747,14 +747,14 @@ vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'move to upper buffer' })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { desc = 'move to right buffer' })
 
 -- resize
-vim.keymap.set('n', '<C-Up>', ':resize -2<CR>', { desc = 'move to left buffer' })
-vim.keymap.set('n', '<C-Down>', ':resize +2<CR>', { desc = 'move to lower buffer' })
-vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>', { desc = 'move to upper buffer' })
-vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', { desc = 'move to right buffer' })
+vim.keymap.set('n', '<C-Up>', ':resize -2<CR>', { desc = 'reduce buffer height' })
+vim.keymap.set('n', '<C-Down>', ':resize +2<CR>', { desc = 'increase buffer height' })
+vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>', { desc = 'reduce buffer width' })
+vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', { desc = 'increase buffer width' })
 
 -- move lines
-vim.keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
 vim.keymap.set("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
+vim.keymap.set("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
 vim.keymap.set("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
 vim.keymap.set("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
 vim.keymap.set("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
