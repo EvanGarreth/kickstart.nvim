@@ -793,6 +793,8 @@ local function _lazygit_toggle()
 end
 
 vim.keymap.set('n', '<leader>g', _lazygit_toggle, { noremap = true, silent = true, desc = 'lazy [g]it' })
+vim.keymap.set('n', '<leader>gdf', require('diffview').file_history, { noremap = true, silent = true, desc = '[g]it [f]ile history' })
+vim.keymap.set('n', '<leader>gd', require('diffview').open, { noremap = true, silent = true, desc = '[g]it [f]ile history' })
 
 -- k9s
 local k9s = Terminal:new({ cmd = "k9s", hidden = true })

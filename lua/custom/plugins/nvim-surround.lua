@@ -1,3 +1,6 @@
 return {
-   'kylechui/nvim-surround'
+   'kylechui/nvim-surround',
+   lazy = false,
+   priority = 1,
+   opts = {}
 }
