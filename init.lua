@@ -140,6 +140,7 @@ require('lazy').setup({
         theme = 'catppuccin',
         component_separators = '|',
         section_separators = '',
+        path = 1
       },
     },
   },
@@ -294,7 +295,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('telescope').setup {
   defaults = {
     layout_strategy = 'vertical',
-    path_display = { 'smart' },
+    -- path_display = { 'smart' },
     preview = {
       filesize_limit = 0.1, -- MB
       ls_short = true
@@ -374,6 +375,7 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -381,7 +383,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'c_sharp', 'dart', 'go', 'lua', 'python', 'rust', 'scss', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'c_sharp', 'dart', 'go', 'lua', 'python', 'rust', 'scss', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'terraform', 'yaml' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -445,7 +447,7 @@ vim.defer_fn(function()
 end, 0)
 
 -- vim.keymap.set("n", "<leader>rn", ":IncRename ")
-vim.keymap.set("n", "<leader>rn", function ()
+vim.keymap.set("n", "<leader>rn", function()
   require("inc_rename").setup()
   return ":IncRename"
 end, { desc = "[R]e[n]ame", expr = true })
@@ -482,7 +484,7 @@ local on_attach = function(client, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<C-K>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -783,7 +785,7 @@ require('toggleterm').setup {
 
 vim.keymap.set('n', '<C-t>', ':ToggleTerm<CR>', { desc = '[t]erminal' })
 vim.keymap.set('t', '<C-t>', '<C-\\><C-n><C-w>l', { desc = 'close [t]erminal' })
-  
+
 -- LazyGit
 local Terminal = require('toggleterm.terminal').Terminal
 local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
@@ -793,8 +795,10 @@ local function _lazygit_toggle()
 end
 
 vim.keymap.set('n', '<leader>g', _lazygit_toggle, { noremap = true, silent = true, desc = 'lazy [g]it' })
-vim.keymap.set('n', '<leader>gdf', require('diffview').file_history, { noremap = true, silent = true, desc = '[g]it [f]ile history' })
-vim.keymap.set('n', '<leader>gd', require('diffview').open, { noremap = true, silent = true, desc = '[g]it [f]ile history' })
+vim.keymap.set('n', '<leader>gdf', require('diffview').file_history,
+  { noremap = true, silent = true, desc = '[g]it [f]ile history' })
+vim.keymap.set('n', '<leader>gd', require('diffview').open,
+  { noremap = true, silent = true, desc = '[g]it [f]ile history' })
 
 -- k9s
 local k9s = Terminal:new({ cmd = "k9s", hidden = true })
@@ -803,7 +807,8 @@ local function _k9s_toggle()
 end
 vim.keymap.set('n', '<leader>k', _k9s_toggle, { noremap = true, silent = true, desc = '[k]9s' })
 
-vim.keymap.set('n', '<leader>fn', ':let @+ = expand("%:t")<cr>', { noremap = true, silent = true, desc = "[f]ile [n]ame" })
+vim.keymap.set('n', '<leader>fn', ':let @+ = expand("%:t")<cr>',
+  { noremap = true, silent = true, desc = "[f]ile [n]ame" })
 vim.keymap.set('n', '<leader>fp', ':let @+ = expand("%")<cr>', { noremap = true, silent = true, desc = "[f]ile [p]ath" })
 
 -- scrolling
