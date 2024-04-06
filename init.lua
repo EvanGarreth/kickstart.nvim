@@ -8,6 +8,9 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- reduce noise on diffs
+vim.opt.fillchars:append { diff = ' ' }
+
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
 
@@ -71,7 +74,6 @@ vim.opt.scrolloff = 10
 -- Tabs
 vim.o.expandtab = true
 vim.o.smartindent = true
-vim.o.expandtab = true
 vim.o.tabstop = 4
 vim.o.softtabstop = 0
 vim.o.shiftwidth = 0
