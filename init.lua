@@ -722,6 +722,7 @@ vim.keymap.set('n', '<leader>e', ':Telescope file_browser path=%:p:h select_buff
 require('toggleterm').setup {
   -- direction = 'float',
   size = 25,
+  shade_terminals = false,
 }
 
 vim.keymap.set('n', '<C-t>', ':ToggleTerm<CR>', { desc = '[t]erminal' })
