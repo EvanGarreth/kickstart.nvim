@@ -8,7 +8,6 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- reduce noise on diffs
 vim.opt.fillchars:append { diff = ' ' }
 
 -- Set to true if you have a Nerd Font installed
@@ -137,11 +136,6 @@ vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open [D]i
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -310,6 +304,7 @@ require('lazy').setup({
           map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
+          map('<C-K>', vim.lsp.buf.signature_help, 'Signature Documentation')
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
           -- The following two autocommands are used to highlight references of the
@@ -725,7 +720,8 @@ vim.keymap.set('n', '<leader>e', ':Telescope file_browser path=%:p:h select_buff
 
 -- Toggleterm
 require('toggleterm').setup {
-  direction = 'float',
+  -- direction = 'float',
+  size = 25,
 }
 
 vim.keymap.set('n', '<C-t>', ':ToggleTerm<CR>', { desc = '[t]erminal' })
@@ -733,7 +729,7 @@ vim.keymap.set('t', '<C-t>', '<C-\\><C-n><C-w>l', { desc = 'close [t]erminal' })
 
 -- LazyGit
 local Terminal = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new { cmd = 'lazygit', hidden = true }
+local lazygit = Terminal:new { cmd = 'lazygit', hidden = true, direction = 'float' }
 
 local function _lazygit_toggle()
   lazygit:toggle()
@@ -744,7 +740,7 @@ vim.keymap.set('n', '<leader>gdf', require('diffview').file_history, { noremap =
 vim.keymap.set('n', '<leader>gd', require('diffview').open, { noremap = true, silent = true, desc = '[g]it [f]ile history' })
 
 -- k9s
-local k9s = Terminal:new { cmd = 'k9s', hidden = true }
+local k9s = Terminal:new { cmd = 'k9s', hidden = true, direction = 'float' }
 local function _k9s_toggle()
   k9s:toggle()
 end
