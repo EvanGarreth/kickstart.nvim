@@ -438,11 +438,16 @@ require('lazy').setup({
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
     },
-    config = function()
+    opts = function(_, opts)
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
+
+      opts.window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      }
 
       local lsp_symbols = {
         Text = ' 	(Text) ',
@@ -722,7 +727,6 @@ vim.keymap.set('n', '<leader>e', ':Telescope file_browser path=%:p:h select_buff
 require('toggleterm').setup {
   -- direction = 'float',
   size = 25,
-  shade_terminals = false,
 }
 
 vim.keymap.set('n', '<C-t>', ':ToggleTerm<CR>', { desc = '[t]erminal' })
