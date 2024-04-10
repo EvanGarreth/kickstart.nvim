@@ -299,7 +299,6 @@ require('lazy').setup({
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
           map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
@@ -317,6 +316,12 @@ require('lazy').setup({
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+          if client.name == 'omnisharp' then
+            map('gd', "<cmd>lua require('omnisharp_extended').telescope_lsp_definitions()<cr>", '[G]oto [D]efinition')
+          else
+            map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          end
           if client and client.server_capabilities.documentHighlightProvider then
             vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
               buffer = event.buf,
@@ -454,31 +459,31 @@ require('lazy').setup({
       }
 
       local lsp_symbols = {
-        Text = ' 	(Text) ',
-        Method = ' 	(Method)',
-        Function = ' 	(Function)',
-        Constructor = '   (Constructor)',
-        Field = ' ﴲ  (Field)',
+        Text = ' (Text) ',
+        Method = ' (Method)',
+        Function = ' (Function)',
+        Constructor = '  (Constructor)',
+        Field = 'ﴲ (Field)',
         Variable = '[] (Variable)',
-        Class = '   (Class)',
-        Interface = ' ﰮ  (Interface)',
-        Module = ' 	(Module)',
-        Property = ' 襁 (Property)',
-        Unit = ' 	(Unit)',
-        Value = '   (Value)',
-        Enum = ' 練 (Enum)',
-        Keyword = '   (Keyword)',
-        Snippet = '   (Snippet)',
-        Color = '   (Color)',
-        File = ' 	(File)',
-        Reference = '   (Reference)',
-        Folder = ' 	(Folder)',
-        EnumMember = ' 	(EnumMember)',
-        Constant = ' ﲀ	(Constant)',
-        Struct = ' ﳤ	(Struct)',
-        Event = '   (Event)',
-        Operator = ' 	(Operator)',
-        TypeParameter = '   (TypeParameter)',
+        Class = ' (Class)',
+        Interface = 'ﰮ (Interface)',
+        Module = ' (Module)',
+        Property = '襁(Property)',
+        Unit = ' (Unit)',
+        Value = ' (Value)',
+        Enum = '練(Enum)',
+        Keyword = ' (Keyword)',
+        Snippet = '  (Snippet)',
+        Color = ' (Color)',
+        File = ' (File)',
+        Reference = ' (Reference)',
+        Folder = ' (Folder)',
+        EnumMember = '	 (EnumMember)',
+        Constant = 'ﲀ (Constant)',
+        Struct = 'ﳤ (Struct)',
+        Event = ' (Event)',
+        Operator = ' (Operator)',
+        TypeParameter = ' (TypeParameter)',
       }
 
       cmp.setup {
@@ -643,17 +648,21 @@ require('lazy').setup({
         'c_sharp',
         'dart',
         'go',
+        'graphql',
+        'http',
         'lua',
         'python',
         'rust',
         'scss',
         'tsx',
         'javascript',
+        'json',
         'typescript',
         'vimdoc',
         'vim',
         'bash',
         'terraform',
+        'xml',
         'yaml',
       },
       -- Autoinstall languages that are not installed
