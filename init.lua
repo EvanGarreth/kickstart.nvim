@@ -20,6 +20,9 @@ vim.opt.guifont = 'Comic Shanns Mono'
 vim.o.relativenumber = true
 vim.o.number = true
 
+-- no wrapping
+vim.o.wrap = false
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
@@ -138,6 +141,18 @@ vim.keymap.set('n', '<leader>dl', vim.diagnostic.setloclist, { desc = 'Open [D]i
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
+
+vim.o.foldenable = false
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  callback = function()
+    if require('nvim-treesitter.parsers').has_parser() then
+      vim.opt.foldmethod = 'expr'
+      vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+    else
+      vim.opt.foldmethod = 'syntax'
+    end
+  end,
+})
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -673,7 +688,16 @@ require('lazy').setup({
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
+      local ai = require 'mini.ai'
+      local spec_treesitter = ai.gen_spec.treesitter
+      ai.setup {
+        n_lines = 500,
+        custom_textobjects = {
+          f = spec_treesitter { a = '@function.outer', i = '@function.inner' },
+          c = spec_treesitter { a = '@class.outer', i = '@class.inner' },
+          i = spec_treesitter { a = '@conditional.outer', i = '@conditional.inner' },
+        },
+      }
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
@@ -752,6 +776,8 @@ require('lazy').setup({
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
 
+      -- require('nvim-treesitter-textobjects').setup {}
+
       -- There are additional nvim-treesitter modules that you can use to interact
       -- with nvim-treesitter. You should go explore a few and see what interests you:
       --
@@ -759,6 +785,10 @@ require('lazy').setup({
       --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
     end,
+  },
+
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
   },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
