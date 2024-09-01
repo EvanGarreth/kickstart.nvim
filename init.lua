@@ -86,6 +86,9 @@ vim.o.shiftwidth = 0
 -- Completion
 vim.o.completeopt = 'noinsert,menuone,noselect'
 
+-- not sure why but this causes telescope file browser to close when executed twice
+vim.keymap.set('n', '<A-h>', '<Nop>')
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -281,17 +284,13 @@ require('lazy').setup({
             filesize_limit = 0.1, -- MB
             ls_short = true,
           },
-          extensions = {
-            file_browser = {
-              preview = {
-                ls_short = true,
-              },
-            },
-          },
         },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
+          },
+          file_browser = {
+            hidden = { file_browser = true, folder_browser = true },
           },
         },
       }
@@ -299,6 +298,8 @@ require('lazy').setup({
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'file_browser')
+      vim.keymap.set('n', '<leader>e', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = 'open [e]xplorer', noremap = true })
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -857,10 +858,6 @@ require('lazy').setup({
     },
   },
 })
-
--- file browser
-pcall(require('telescope').load_extension, 'file_browser')
-vim.keymap.set('n', '<leader>e', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = 'open [e]xplorer', noremap = true })
 
 -- Toggleterm
 require('toggleterm').setup {
