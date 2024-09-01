@@ -389,6 +389,7 @@ require('lazy').setup({
           map('<C-K>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
           map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -396,12 +397,6 @@ require('lazy').setup({
           --
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-          if client.name == 'omnisharp' then
-            map('gd', "<cmd>lua require('omnisharp_extended').telescope_lsp_definitions()<cr>", '[G]oto [D]efinition')
-          else
-            map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          end
 
           if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
