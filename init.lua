@@ -262,7 +262,7 @@ require('lazy').setup({
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
-    branch = '0.1.x',
+    branch = 'master',
     dependencies = {
       'nvim-lua/plenary.nvim',
       { -- If encountering errors, see telescope-fzf-native README for installation instructions
@@ -278,11 +278,38 @@ require('lazy').setup({
     config = function()
       require('telescope').setup {
         defaults = {
-          layout_strategy = 'vertical',
-          -- path_display = { 'smart' },
+          layout_strategy = 'flex',
+          path_display = { 'filename_first' },
           preview = {
             filesize_limit = 0.1, -- MB
-            ls_short = true,
+            -- ls_short = true,
+          },
+          layout_config = {
+            flex = { flip_columns = 100 },
+            horizontal = {
+              mirror = false,
+              prompt_position = 'top',
+              width = function(_, cols, _)
+                return math.floor(cols * 0.80)
+              end,
+              height = function(_, _, rows)
+                return math.floor(rows * 0.90)
+              end,
+              preview_cutoff = 10,
+              preview_width = 0.5,
+            },
+            vertical = {
+              mirror = true,
+              prompt_position = 'top',
+              width = function(_, cols, _)
+                return math.floor(cols * 0.80)
+              end,
+              height = function(_, _, rows)
+                return math.floor(rows * 0.90)
+              end,
+              preview_cutoff = 10,
+              preview_height = 0.5,
+            },
           },
         },
         extensions = {
