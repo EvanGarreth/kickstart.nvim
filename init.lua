@@ -786,6 +786,9 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+      require('mini.sessions').setup {
+        autoread = true,
+      }
     end,
   },
   { -- Highlight, edit, and navigate code
