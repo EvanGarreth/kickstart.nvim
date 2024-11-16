@@ -33,6 +33,10 @@ return {
           'IndentBlanklineIndent6',
         },
       },
+      scope = {
+        show_start = false,
+        show_end = false,
+      },
     },
   },
 }
