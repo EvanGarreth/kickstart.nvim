@@ -25,6 +25,7 @@
   "mini.nvim": { "branch": "main", "commit": "9618cf56e76cc0caab54ad60116a8d72f99d7b3b" },
   "neotest": { "branch": "master", "commit": "6d3d22cdad49999ef774ebe1bc250a4994038964" },
   "neotest-dotnet": { "branch": "main", "commit": "03509791912eaeac9f993f7cf49e170eca06a8bc" },
+  "neotest-rust": { "branch": "main", "commit": "f2e0b3713d3559ce33be9aa32ace3a6051ec5593" },
   "nvim-autopairs": { "branch": "master", "commit": "ee297f215e95a60b01fde33275cc3c820eddeebe" },
   "nvim-cmp": { "branch": "main", "commit": "ae644feb7b67bf1ce4260c231d1d4300b19c6f30" },
   "nvim-colorizer.lua": { "branch": "master", "commit": "0671e0eabc6842676d3310370e8fae4e1c51d7f9" },
