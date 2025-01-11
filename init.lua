@@ -89,6 +89,9 @@ vim.o.completeopt = 'noinsert,menuone,noselect'
 -- not sure why but this causes telescope file browser to close when executed twice
 vim.keymap.set('n', '<A-h>', '<Nop>')
 
+-- don't save blank buffers to sessions (like neo-tree, trouble etc.)
+vim.opt.sessionoptions:remove 'blank'
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
