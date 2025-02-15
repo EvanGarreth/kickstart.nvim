@@ -950,24 +950,8 @@ require('toggleterm').setup {
 vim.keymap.set('n', '<C-t>', ':ToggleTerm<CR>', { desc = '[t]erminal' })
 vim.keymap.set('t', '<C-t>', '<C-\\><C-n><C-w>l', { desc = 'close [t]erminal' })
 
--- LazyGit
-local Terminal = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new { cmd = 'lazygit', hidden = true, direction = 'float' }
-
-local function _lazygit_toggle()
-  lazygit:toggle()
-end
-
-vim.keymap.set('n', '<leader>g', _lazygit_toggle, { noremap = true, silent = true, desc = 'lazy [g]it' })
 vim.keymap.set('n', '<leader>gdf', require('diffview').file_history, { noremap = true, silent = true, desc = '[g]it [f]ile history' })
 vim.keymap.set('n', '<leader>gd', require('diffview').open, { noremap = true, silent = true, desc = '[g]it [f]ile history' })
-
--- k9s
-local k9s = Terminal:new { cmd = 'k9s', hidden = true, direction = 'float' }
-local function _k9s_toggle()
-  k9s:toggle()
-end
-vim.keymap.set('n', '<leader>k', _k9s_toggle, { noremap = true, silent = true, desc = '[k]9s' })
 
 -- copy file name & path
 vim.keymap.set('n', '<leader>fn', ':let @+ = expand("%:t")<cr>', { noremap = true, silent = true, desc = '[f]ile [n]ame' })
