@@ -940,16 +940,6 @@ require('lazy').setup({
   },
 })
 
--- Toggleterm
-require('toggleterm').setup {
-  -- direction = 'float',
-  size = 25,
-  shade_terminals = false,
-}
-
-vim.keymap.set('n', '<C-t>', ':ToggleTerm<CR>', { desc = '[t]erminal' })
-vim.keymap.set('t', '<C-t>', '<C-\\><C-n><C-w>l', { desc = 'close [t]erminal' })
-
 vim.keymap.set('n', '<leader>gdf', require('diffview').file_history, { noremap = true, silent = true, desc = '[g]it [f]ile history' })
 vim.keymap.set('n', '<leader>gd', require('diffview').open, { noremap = true, silent = true, desc = '[g]it [f]ile history' })
 
