@@ -6,6 +6,7 @@ return {
     'nvim-treesitter/nvim-treesitter',
     'Issafalcon/neotest-dotnet',
     'rouge8/neotest-rust',
+    'nvim-neotest/nvim-nio',
   },
   config = function()
     local neotest = require 'neotest'
