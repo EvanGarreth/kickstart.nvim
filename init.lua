@@ -96,7 +96,7 @@ vim.opt.sessionoptions:remove 'blank'
 --  See `:help vim.keymap.set()`
 
 -- buffers
-vim.keymap.set('n', '<leader>q', ':bd<CR>', { desc = 'close buffer' })
+vim.keymap.set('n', '<leader>q', ':bp<CR>bd #<CR>', { desc = 'close buffer' })
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'move to left buffer' })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'move to lower buffer' })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { desc = 'move to upper buffer' })
@@ -115,14 +115,6 @@ vim.keymap.set('i', '<A-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move down' })
 vim.keymap.set('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move up' })
 vim.keymap.set('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move down' })
 vim.keymap.set('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
-
--- windows
-vim.keymap.set('n', '<leader>ww', '<C-W>p', { desc = 'Other window' })
-vim.keymap.set('n', '<leader>wd', '<C-W>c', { desc = 'Delete window' })
-vim.keymap.set('n', '<leader>w-', '<C-W>s', { desc = 'Split window below' })
-vim.keymap.set('n', '<leader>w|', '<C-W>v', { desc = 'Split window right' })
-vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = 'Split window below' })
-vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = 'Split window right' })
 
 -- quit all
 vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit all' })
@@ -197,6 +189,7 @@ require('lazy').setup({
 
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
+
     opts = {
       signs = {
         add = { text = '+' },
@@ -275,8 +268,8 @@ require('lazy').setup({
           return vim.fn.executable 'make' == 1
         end,
       },
-      { 'nvim-telescope/telescope-ui-select.nvim' },
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      { 'nvim-telescope/telescope-ui-select.nvim' },
     },
     config = function()
       require('telescope').setup {
@@ -891,27 +884,13 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
 
-  -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
-  -- init.lua. If you want these files, they are in the repository, so you can just download them and
-  -- place them in the correct locations.
-
-  -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-  --
-  --  Here are some example plugins that I've included in the Kickstart repository.
-  --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
-  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --    This is the easiest way to modularize your config.
-  --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   { import = 'custom.plugins' },
 
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
