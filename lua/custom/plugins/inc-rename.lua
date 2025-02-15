@@ -1,5 +1,5 @@
 return {
-	"smjonas/inc-rename.nvim",
-	lazy = false,
-	priority = 1
+  'smjonas/inc-rename.nvim',
+  lazy = false,
+  priority = 1,
 }
