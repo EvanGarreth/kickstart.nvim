@@ -96,6 +96,7 @@ vim.opt.sessionoptions:remove 'blank'
 --  See `:help vim.keymap.set()`
 
 -- buffers
+vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit all' })
 vim.keymap.set('n', '<leader>q', ':bp<CR>bd #<CR>', { desc = 'close buffer' })
 vim.keymap.set('n', '<C-h>', '<C-w>h', { desc = 'move to left buffer' })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { desc = 'move to lower buffer' })
@@ -115,9 +116,6 @@ vim.keymap.set('i', '<A-j>', '<esc><cmd>m .+1<cr>==gi', { desc = 'Move down' })
 vim.keymap.set('i', '<A-k>', '<esc><cmd>m .-2<cr>==gi', { desc = 'Move up' })
 vim.keymap.set('v', '<A-j>', ":m '>+1<cr>gv=gv", { desc = 'Move down' })
 vim.keymap.set('v', '<A-k>', ":m '<-2<cr>gv=gv", { desc = 'Move up' })
-
--- quit all
-vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit all' })
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
