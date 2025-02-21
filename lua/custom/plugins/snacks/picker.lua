@@ -5,6 +5,8 @@ return {
   opts = {
     picker = {
       enabled = true,
+      hidden = true,
+      ignored = true,
       layout = 'vertical',
       formatters = {
         file = {
