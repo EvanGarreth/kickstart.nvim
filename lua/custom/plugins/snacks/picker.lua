@@ -40,7 +40,12 @@ return {
     {
       '\\',
       function()
-        Snacks.explorer()
+        local window = Snacks.picker.get({ source = 'explorer' })[1]
+        if window then
+          window.list.win:focus()
+        else
+          Snacks.explorer.open()
+        end
       end,
       desc = 'file explorer',
     },
