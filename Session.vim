@@ -13,7 +13,7 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +534 ~/.config/jj-nvim/init.lua
+badd +120 ~/.config/jj-nvim/init.lua
 badd +1 ~/.config/jj-nvim/lua/custom/plugins/snacks.indent.lua
 badd +7 ~/.config/jj-nvim/lua/custom/plugins/roslyn.lua
 badd +1 ~/.config/jj-nvim/lua/custom/plugins/init.lua
@@ -23,15 +23,10 @@ badd +1 ~/.config/jj-nvim/lua/custom/plugins/snacks/animate.lua
 badd +7 ~/.config/jj-nvim/lua/custom/plugins/snacks/explorer.lua
 badd +8 ~/.config/jj-nvim/lua/custom/plugins/autopairs.lua
 badd +962 ~/.local/share/jj-nvim/lazy/mini.nvim/lua/mini/ai.lua
-badd +3 ~/.config/jj-nvim/lua/custom/plugins/snacks/picker.lua
-badd +4 ~/.config/jj-nvim/lua/custom/plugins/actions-preview.lua
-badd +24 ~/.config/jj-nvim/lua/custom/plugins/copilot.lua
-badd +3 ~/.config/jj-nvim/lua/custom/plugins/copilot-chat.lua
-badd +6 ~/.config/jj-nvim/lua/custom/plugins/copilot-cmp.lua
-badd +1 ~/.local/state/jj-nvim/lsp.log
+badd +14 ~/.config/jj-nvim/lua/custom/plugins/snacks/picker.lua
 argglobal
 %argdel
-edit ~/.config/jj-nvim/lua/custom/plugins/copilot-cmp.lua
+edit ~/.config/jj-nvim/lua/custom/plugins/snacks/picker.lua
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -48,10 +43,9 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 107 + 107) / 215)
-exe 'vert 2resize ' . ((&columns * 107 + 107) / 215)
+wincmd =
 argglobal
-balt ~/.config/jj-nvim/lua/custom/plugins/copilot.lua
+balt ~/.config/jj-nvim/init.lua
 setlocal fdm=expr
 setlocal fde=nvim_treesitter#foldexpr()
 setlocal fmr={{{,}}}
@@ -60,19 +54,19 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal nofen
-let s:l = 6 - ((5 * winheight(0) + 29) / 59)
+let s:l = 14 - ((13 * winheight(0) + 31) / 63)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 6
-normal! 014|
+keepjumps 14
+normal! 023|
 wincmd w
 argglobal
-if bufexists(fnamemodify("~/.config/jj-nvim/init.lua", ":p")) | buffer ~/.config/jj-nvim/init.lua | else | edit ~/.config/jj-nvim/init.lua | endif
+if bufexists(fnamemodify("~/.config/jj-nvim/lua/custom/plugins/snacks/indent.lua", ":p")) | buffer ~/.config/jj-nvim/lua/custom/plugins/snacks/indent.lua | else | edit ~/.config/jj-nvim/lua/custom/plugins/snacks/indent.lua | endif
 if &buftype ==# 'terminal'
-  silent file ~/.config/jj-nvim/init.lua
+  silent file ~/.config/jj-nvim/lua/custom/plugins/snacks/indent.lua
 endif
-balt ~/.config/jj-nvim/lua/custom/plugins/copilot-cmp.lua
+balt ~/.config/jj-nvim/init.lua
 setlocal fdm=expr
 setlocal fde=nvim_treesitter#foldexpr()
 setlocal fmr={{{,}}}
@@ -81,16 +75,14 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal nofen
-let s:l = 555 - ((34 * winheight(0) + 29) / 59)
+let s:l = 42 - ((41 * winheight(0) + 31) / 63)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 555
-normal! 013|
+keepjumps 42
+normal! 0
 wincmd w
-2wincmd w
-exe 'vert 1resize ' . ((&columns * 107 + 107) / 215)
-exe 'vert 2resize ' . ((&columns * 107 + 107) / 215)
+wincmd =
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
