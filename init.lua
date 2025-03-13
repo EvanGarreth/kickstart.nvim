@@ -531,6 +531,7 @@ require('lazy').setup({
         Event = '',
         Operator = '󰆕',
         TypeParameter = '',
+        Copilot = '',
       }
 
       cmp.setup {
@@ -590,6 +591,7 @@ require('lazy').setup({
           end, { 'i', 's' }),
         },
         sources = {
+          { name = 'copilot', group_index = 2, priority = 100 },
           {
             name = 'lazydev',
             -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
