@@ -23,17 +23,16 @@ badd +1 ~/.config/jj-nvim/lua/custom/plugins/snacks/animate.lua
 badd +7 ~/.config/jj-nvim/lua/custom/plugins/snacks/explorer.lua
 badd +8 ~/.config/jj-nvim/lua/custom/plugins/autopairs.lua
 badd +962 ~/.local/share/jj-nvim/lazy/mini.nvim/lua/mini/ai.lua
-badd +8 ~/.config/jj-nvim/lua/custom/plugins/snacks/picker.lua
+badd +3 ~/.config/jj-nvim/lua/custom/plugins/snacks/picker.lua
+badd +4 ~/.config/jj-nvim/lua/custom/plugins/actions-preview.lua
+badd +1 ~/.config/jj-nvim/lua/custom/plugins/copilot.lua
+badd +3 ~/.config/jj-nvim/lua/custom/plugins/copilot-chat.lua
 argglobal
 %argdel
-edit ~/.config/jj-nvim/lua/custom/plugins/snacks/picker.lua
+edit ~/.config/jj-nvim/lua/custom/plugins/actions-preview.lua
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
 let &splitbelow = s:save_splitbelow
 let &splitright = s:save_splitright
 wincmd t
@@ -43,10 +42,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 108 + 108) / 217)
-exe 'vert 2resize ' . ((&columns * 108 + 108) / 217)
 argglobal
-balt ~/.config/jj-nvim/init.lua
+balt ~/.config/jj-nvim/lua/custom/plugins/copilot-chat.lua
 setlocal fdm=expr
 setlocal fde=nvim_treesitter#foldexpr()
 setlocal fmr={{{,}}}
@@ -55,36 +52,12 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal nofen
-let s:l = 2 - ((1 * winheight(0) + 30) / 61)
+let s:l = 4 - ((3 * winheight(0) + 31) / 63)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 2
-normal! 014|
-wincmd w
-argglobal
-if bufexists(fnamemodify("~/.config/jj-nvim/lua/custom/plugins/snacks/indent.lua", ":p")) | buffer ~/.config/jj-nvim/lua/custom/plugins/snacks/indent.lua | else | edit ~/.config/jj-nvim/lua/custom/plugins/snacks/indent.lua | endif
-if &buftype ==# 'terminal'
-  silent file ~/.config/jj-nvim/lua/custom/plugins/snacks/indent.lua
-endif
-balt ~/.config/jj-nvim/init.lua
-setlocal fdm=expr
-setlocal fde=nvim_treesitter#foldexpr()
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal nofen
-let s:l = 42 - ((41 * winheight(0) + 30) / 61)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 42
+keepjumps 4
 normal! 0
-wincmd w
-exe 'vert 1resize ' . ((&columns * 108 + 108) / 217)
-exe 'vert 2resize ' . ((&columns * 108 + 108) / 217)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
