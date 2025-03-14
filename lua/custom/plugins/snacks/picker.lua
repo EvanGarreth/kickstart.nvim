@@ -11,7 +11,13 @@ return {
       formatters = {
         file = {
           filename_first = true,
+          truncate = 60,
         },
+      },
+      matcher = {
+        sort_empty = true,
+        cwd_bonus = true,
+        frecency = true,
       },
     },
   },
