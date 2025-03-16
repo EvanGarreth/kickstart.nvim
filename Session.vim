@@ -43,7 +43,8 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-wincmd =
+exe 'vert 1resize ' . ((&columns * 78 + 40) / 80)
+exe 'vert 2resize ' . ((&columns * 1 + 40) / 80)
 argglobal
 balt ~/.config/jj-nvim/init.lua
 setlocal fdm=expr
@@ -54,7 +55,7 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal nofen
-let s:l = 14 - ((13 * winheight(0) + 31) / 63)
+let s:l = 14 - ((10 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
@@ -75,14 +76,15 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal nofen
-let s:l = 42 - ((41 * winheight(0) + 31) / 63)
+let s:l = 42 - ((14 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 42
 normal! 0
 wincmd w
-wincmd =
+exe 'vert 1resize ' . ((&columns * 78 + 40) / 80)
+exe 'vert 2resize ' . ((&columns * 1 + 40) / 80)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
