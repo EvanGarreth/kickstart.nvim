@@ -802,8 +802,8 @@ require('lazy').setup({
   },
 })
 
-vim.keymap.set('n', '<leader>gdf', require('diffview').file_history, { noremap = true, silent = true, desc = '[g]it [f]ile history' })
-vim.keymap.set('n', '<leader>gd', require('diffview').open, { noremap = true, silent = true, desc = '[g]it [f]ile history' })
+vim.keymap.set('n', '<leader>Gd', require('diffview').open, { noremap = true, silent = true, desc = '[G]it diffview' })
+vim.keymap.set('n', '<leader>Gf', require('diffview').file_history, { noremap = true, silent = true, desc = '[G]it [f]ile history' })
 
 -- copy file name & path
 vim.keymap.set('n', '<leader>fn', ':let @+ = expand("%:t")<cr>', { noremap = true, silent = true, desc = '[f]ile [n]ame' })

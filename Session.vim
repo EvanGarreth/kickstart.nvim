@@ -23,7 +23,7 @@ badd +1 ~/.config/jj-nvim/lua/custom/plugins/snacks/animate.lua
 badd +7 ~/.config/jj-nvim/lua/custom/plugins/snacks/explorer.lua
 badd +8 ~/.config/jj-nvim/lua/custom/plugins/autopairs.lua
 badd +962 ~/.local/share/jj-nvim/lazy/mini.nvim/lua/mini/ai.lua
-badd +14 ~/.config/jj-nvim/lua/custom/plugins/snacks/picker.lua
+badd +8 ~/.config/jj-nvim/lua/custom/plugins/snacks/picker.lua
 argglobal
 %argdel
 edit ~/.config/jj-nvim/lua/custom/plugins/snacks/picker.lua
@@ -43,8 +43,7 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 78 + 40) / 80)
-exe 'vert 2resize ' . ((&columns * 1 + 40) / 80)
+wincmd =
 argglobal
 balt ~/.config/jj-nvim/init.lua
 setlocal fdm=expr
@@ -55,12 +54,12 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal nofen
-let s:l = 14 - ((10 * winheight(0) + 11) / 22)
+let s:l = 8 - ((7 * winheight(0) + 18) / 37)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 14
-normal! 023|
+keepjumps 8
+normal! 020|
 wincmd w
 argglobal
 if bufexists(fnamemodify("~/.config/jj-nvim/lua/custom/plugins/snacks/indent.lua", ":p")) | buffer ~/.config/jj-nvim/lua/custom/plugins/snacks/indent.lua | else | edit ~/.config/jj-nvim/lua/custom/plugins/snacks/indent.lua | endif
@@ -76,15 +75,14 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal nofen
-let s:l = 42 - ((14 * winheight(0) + 11) / 22)
+let s:l = 42 - ((24 * winheight(0) + 18) / 37)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 42
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 78 + 40) / 80)
-exe 'vert 2resize ' . ((&columns * 1 + 40) / 80)
+wincmd =
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -100,7 +98,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :
