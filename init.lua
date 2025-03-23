@@ -451,6 +451,11 @@ require('lazy').setup({
       formatters_by_ft = {
         lua = { 'stylua' },
         rust = { 'rustfmt', lsp_format = 'fallback' },
+
+        typescript = { 'prettierd', 'prettier', lsp_format = 'fallback' },
+        html = { 'prettierd', 'prettier', lsp_format = 'fallback' },
+        css = { 'prettierd', 'prettier', lsp_format = 'fallback' },
+
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -716,6 +721,7 @@ require('lazy').setup({
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
       ensure_installed = {
+        'angular',
         'bash',
         'c',
         'cpp',
