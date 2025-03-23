@@ -455,6 +455,7 @@ require('lazy').setup({
         typescript = { 'prettierd', 'prettier', lsp_format = 'fallback' },
         html = { 'prettierd', 'prettier', lsp_format = 'fallback' },
         css = { 'prettierd', 'prettier', lsp_format = 'fallback' },
+        json = { 'prettierd', 'prettier', lsp_format = 'fallback' },
 
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
