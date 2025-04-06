@@ -4,4 +4,6 @@ return {
     require('copilot_cmp').setup()
   end,
   lazy = false,
+  -- only really use this at work
+  cond = false,
 }
