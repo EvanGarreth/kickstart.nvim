@@ -96,7 +96,6 @@ return {
         'codelldb',
         'netcorebdg',
         'js-debug-adapter',
-        'vscode-js-debug',
         'firefox-debug-adapter',
       },
     }

@@ -370,6 +370,7 @@ require('lazy').setup({
             [vim.diagnostic.severity.HINT] = '󰌶 ',
           },
         } or {},
+        virtual_text = false,
         -- virtual_text = {
         --   source = 'if_many',
         --   spacing = 2,
@@ -473,7 +474,7 @@ require('lazy').setup({
         -- languages here or re-enable it for the disabled ones.
         local disable_filetypes = { c = true, cpp = true }
         if disable_filetypes[vim.bo[bufnr].filetype] then
-          return nilj
+          return nil
         else
           return {
             timeout_ms = 500,
