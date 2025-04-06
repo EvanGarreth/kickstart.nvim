@@ -15,9 +15,6 @@ return {
       'neotest-rust',
     },
   },
-  config = function()
-    local neotest = require 'neotest'
-  end,
   keys = {
     { '<leader>t', '', desc = '+test' },
     {
