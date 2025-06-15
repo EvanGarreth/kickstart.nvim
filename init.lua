@@ -839,9 +839,6 @@ require('lazy').setup({
   },
 })
 
-vim.keymap.set('n', '<leader>Gd', require('diffview').open, { noremap = true, silent = true, desc = '[G]it diffview' })
-vim.keymap.set('n', '<leader>Gf', require('diffview').file_history, { noremap = true, silent = true, desc = '[G]it [f]ile history' })
-
 -- copy file name & path
 vim.keymap.set('n', '<leader>fn', ':let @+ = expand("%:t")<cr>', { noremap = true, silent = true, desc = '[f]ile [n]ame' })
 vim.keymap.set('n', '<leader>fp', ':let @+ = expand("%")<cr>', { noremap = true, silent = true, desc = '[f]ile [p]ath' })
